@@ -10,7 +10,9 @@
 - [ ] Challenges / Daily Quests
 - [ ] Battle Pass
 - [ ] ClientSettings
+- [x] Timeline
+- [x] Lobby Support
 - [ ] Discord Bot
-- [ ] Authentication
+- [x] Authentication
 - [ ] Vbucks on kill/win
 - [ ] Arena

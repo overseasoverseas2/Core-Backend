@@ -10,6 +10,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "ares-library": "^1.0.5",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "chalk": "^5.4.1",
     "dotenv": "^16.4.7",

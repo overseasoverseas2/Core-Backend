@@ -12,7 +12,7 @@
       "use_random_loadout": false,
       "past_seasons": [],
       "season_match_boost": 0,
-      "loadouts": ["sandbox_loadout", "Flair-loadout"],
+      "loadouts": ["sandbox_loadout", "Core-loadout"],
       "mfa_reward_claimed": true,
       "rested_xp_overflow": 0,
       "current_mtx_platform": "Epic",
@@ -23,7 +23,7 @@
       },
       "skin_granted": false,
       "book_level": 1,
-      "season_num": 11,
+      "season_num": 7,
       "book_xp": 0,
       "creative_dynamic_xp": {},
       "season": {
@@ -146,7 +146,7 @@
       },
       "quantity": 1
     },
-    "Flair-loadout": {
+    "Core-loadout": {
       "templateId": "CosmeticLocker:cosmeticlocker_athena",
       "attributes": {
         "locker_slots_data": {
@@ -198,7 +198,7 @@
         "use_count": 0,
         "banner_icon_template": "",
         "banner_color_template": "",
-        "locker_name": "Flair",
+        "locker_name": "Core",
         "item_seen": false,
         "favorite": false
       },

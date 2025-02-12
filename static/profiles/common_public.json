@@ -7,8 +7,8 @@
   "profileId": "common_public",
   "version": "12",
   "items": {
-    "Token:Flair": {
-      "templateId": "Token:Flair",
+    "Token:Core": {
+      "templateId": "Token:Core",
       "attributes": {
         "item_seen": true
       },
