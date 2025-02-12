@@ -1,7 +1,6 @@
 import app from "..";
 import { applyProfileChanges } from "ares-library";
 import Profile from "../tables/profile";
-import User from "../tables/user";
 
 export default function () {
   app.post(
