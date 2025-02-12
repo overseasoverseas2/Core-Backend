@@ -3,12 +3,14 @@
   "module": "src/index.ts",
   "type": "module",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "chalk": "^5.4.1",
     "dotenv": "^16.4.7",
     "hono": "^4.7.0",
