@@ -25,10 +25,6 @@ export default function () {
             responseVersion: 1,
           });
         }
-        const user = await User.findOne({
-          accountId: c.req.param("accountId"),
-        });
-        if (!user) return c.json({ error: "No user found!" });
 
         const response = await applyProfileChanges(
           profile,

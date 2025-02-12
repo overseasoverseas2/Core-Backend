@@ -5,7 +5,7 @@ import User from "../tables/user";
 
 export default function () {
   app.post(
-    "/fortnite/api/game/v2/profile/:accountId/client/SetMtxPlatform",
+    "/fortnite/api/game/v2/profile/:accountId/client/ClientQuestLogin",
     async (c) => {
       try {
         const { profileId } = c.req.query();
