@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "chalk": "^5.4.1",
+    "dotenv": "^16.4.7",
     "hono": "^4.7.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.0",
