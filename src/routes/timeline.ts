@@ -2,7 +2,7 @@ import app from "..";
 
 export default function () {
   app.get("/fortnite/api/calendar/v1/timeline", async (c) => {
-    const ver = process.env.SEASON;
+    const ver = Bun.env.SEASON;
 
     const current = new Date();
     current.setHours(24, 0, 0, 0);

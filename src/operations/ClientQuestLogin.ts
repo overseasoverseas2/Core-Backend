@@ -28,7 +28,7 @@ export default function () {
           });
         }
 
-        const ver = process.env.SEASON;
+        const ver = Bun.env.SEASON;
 
         const DailyQuestsDir = path.join(
           __dirname,

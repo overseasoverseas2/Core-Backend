@@ -32,7 +32,7 @@ app.notFound(async (c) => {
 
 app.use(logger());
 
-const mongoURI = process.env.MONGO_URL || "mongodb://localhost:27017/core";
+const mongoURI = Bun.env.MONGO_URL || "mongodb://localhost:27017/core";
 try {
   mongoose.connect(mongoURI);
   console.log("Connected to Database");

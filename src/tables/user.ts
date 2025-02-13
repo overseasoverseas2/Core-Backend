@@ -7,6 +7,7 @@ export interface IUser extends Document {
   created: Date;
   banned: boolean;
   accountId: string;
+  hype: number;
 }
 
 const userSchema = new Schema<IUser>({
@@ -14,6 +15,7 @@ const userSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  hype: { type: Number, required: false },
   created: { type: Date, default: Date.now },
   banned: { type: Boolean, default: false },
 });

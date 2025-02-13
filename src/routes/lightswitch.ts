@@ -2,7 +2,7 @@ import app from "..";
 
 export default function () {
   app.get("/lightswitch/api/service/bulk/status", async (c) => {
-    const maintenance = process.env.MAINTENANCE;
+    const maintenance = Bun.env.MAINTENANCE;
 
     if (maintenance === "true") {
       return c.json([

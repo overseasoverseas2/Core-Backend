@@ -20,6 +20,7 @@ export default function () {
     const userProfile = await createProfiles(accountId);
 
     await User.create({
+      hype: 0,
       accountId: accountId,
       username: username,
       email: email,
