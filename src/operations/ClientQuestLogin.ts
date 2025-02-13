@@ -40,7 +40,7 @@ export default function () {
         );
 
         const files = fs.readdirSync(DailyQuestsDir);
-        const DailyQuests = files.sort(() => Math.random() - 0.5).slice(0, 3);
+        const DailyQuests = files.slice(0, 3); // not proper for now....
 
         for (const file of DailyQuests) {
           const questPath = path.join(DailyQuestsDir, file);
