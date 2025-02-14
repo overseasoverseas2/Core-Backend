@@ -2,6 +2,7 @@ import app from "..";
 import { v4 } from "uuid";
 import User from "../tables/user";
 import { sign } from "hono/jwt";
+import { throwError } from "../utilities/throwError";
 
 export default function () {
   app.post("/account/api/oauth/token", async (c) => {
@@ -12,9 +13,20 @@ export default function () {
 
     // will add proper errors later
     if (!user && grant_type !== "client_credentials")
-      return c.json({ error: "User not Found!" });
-    if (!body) return c.json({ error: "Invalid Body" });
-    if (user?.banned) return c.json({ error: "User is banned" }, 404);
+      return throwError(
+        "errors.com.epicgames.common.not_found",
+        "User not Found!", [] , 1004, "", 404, c
+      );
+    if (!body)
+      return throwError(
+        "errors.com.epicgames.common.invalid_request",
+        "Invalid body.", [] , 1004, "", 404, c
+      );
+    if (user?.banned)
+      return throwError(
+        "errors.com.epicgames.common.not_active",
+        "You are banned from Fortnite.", [] , 1004, "", 404, c
+      );
 
     const created = new Date(user?.created ?? Date.now());
 
@@ -37,8 +49,10 @@ export default function () {
         !user?.password ||
         !(await Bun.password.verify(password as string, user.password))
       )
-        return c.json({ error: "Incorrect Password!" });
-
+      return throwError(
+        "errors.com.epicgames.common.invalid_credentials",
+        "Your email or password is incorrect.", [] , 1004, "", 404, c
+      );
       let access = await sign(
         {
           email: body.username,

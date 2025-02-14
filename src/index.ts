@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import path from "path";
 import { config } from "dotenv";
 import { loadRoutes } from "./utilities/loadRoutes";
+import { throwError } from "./utilities/throwError";
 
 config({ path: path.join(__dirname, "../config/.env") });
 
@@ -19,15 +20,10 @@ console.log("Core started running on " + port);
 export default app;
 
 app.notFound(async (c) => {
-  return c.json({
-    errorCode: "errors.com.core.common.not_found",
-    errorMessage:
-      "Sorry the resource you were trying to find could not be found",
-    requestedUrl: c.req.path,
-    numericErrorCode: 1004,
-    originatingService: "fortnite",
-    intent: "prod",
-  });
+  return throwError(
+    "errors.com.core.common.not_found",
+    "Sorry the resource you were trying to find could not be found.", [] , 1004, "", 404, c
+  );
 });
 
 app.use(logger());
