@@ -1,21 +1,16 @@
 import app from "..";
 import User from "../tables/user";
+import { throwError } from "../utilities/throwError";
 
 export default function () {
   app.get("/account/api/public/account/:accountid", async (c) => {
     const user = await User.findOne({ accountId: c.req.param("accountid") });
 
     if (!user) {
-      return c.json({
-        errorCode:
-          "errors.com.core.common.authentication.authentication_failed",
-        errorMessage:
-          "Authentication failed for /api/public/account/:accountId",
-        messageVars: ["/api/public/account/:accountId"],
-        numericErrorCode: 1032,
-        originatingService: "fortnite",
-        intent: "prod",
-      });
+      return throwError(
+        "errors.com.core.common.authentication.authentication_failed",
+        "Authentication failed for /api/public/account/:accountId.", ["/api/public/account/:accountId"] , 1032, "", 404, c
+      );
     }
 
     return c.json({
@@ -81,7 +76,10 @@ export default function () {
     const user = await User.findOne({ username: username });
 
     if (!user)
-      return c.json({ errorCode: "errors.com.epicgames.common.not_found" });
+      return throwError(
+        "errors.com.core.common.not_found",
+        "Sorry the resource you were trying to find could not be found.", [] , 1004, "", 404, c
+      );
 
     return c.json({
       id: user.accountId,
@@ -100,17 +98,17 @@ export default function () {
     const { prefix, platform } = await c.req.query();
 
     if (!prefix || !platform) {
-      return c.json({
-        errorCode: "errors.com.epicgames.common.validation_error",
-        errorMessage: "Invalid request",
-      });
+      return throwError(
+        "errors.com.epicgames.common.validation_error",
+        "Invalid request.", [] , 1004, "", 404, c
+      );
     }
 
     if (typeof prefix !== "string" || !prefix) {
-      return c.json({
-        errorCode: "errors.com.epicgames.common.validation_error",
-        errorMessage: "Invalid request",
-      });
+      return throwError(
+        "errors.com.epicgames.common.validation_error",
+        "Invalid request.", [] , 1004, "", 404, c
+      );
     }
 
     try {
