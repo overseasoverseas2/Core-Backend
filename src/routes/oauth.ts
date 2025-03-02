@@ -5,10 +5,14 @@ import { sign } from "hono/jwt";
 
 export default function () {
   app.post("/account/api/oauth/token", async (c) => {
-    const body = await c.req.parseBody();
+    const body: any = await c.req.parseBody();
     const user = await User.findOne({ email: body.username });
     const { grant_type } = body;
     const id = v4();
+
+    // if (body.username.includes("@")) {
+    //   body.username = body.username.split("@")[0];
+    // }
 
     // will add proper errors later
     if (!user && grant_type !== "client_credentials")
@@ -16,7 +20,93 @@ export default function () {
     if (!body) return c.json({ error: "Invalid Body" });
     if (user?.banned) return c.json({ error: "User is banned" }, 404);
 
-    const created = new Date(user?.created ?? Date.now());
+    // if (Bun.env.NO_DB) {
+    //   if (grant_type === "client_credentials") {
+    //     let access = await sign({ id }, "Core");
+
+    //     return c.json({
+    //       access_token: access,
+    //       expires_in: 28800,
+    //       expires_at: "9999-12-02T01:12:01.100Z",
+    //       token_type: "bearer",
+    //       client_id: id,
+    //       internal_client: true,
+    //       client_service: "fortnite",
+    //     });
+    //   } else if (grant_type === "password") {
+    //     let access = await sign(
+    //       {
+    //         email: body.username,
+    //         password: body.password,
+    //         type: "access",
+    //       },
+    //       "Core"
+    //     );
+
+    //     let refresh = await sign(
+    //       {
+    //         email: body.username,
+    //         password: body.password,
+    //         type: "refresh",
+    //       },
+    //       "Core"
+    //     );
+
+    //     return c.json({
+    //       access_token: access,
+    //       expires_in: 28800,
+    //       expires_at: "9999-12-02T01:12:01.100Z",
+    //       token_type: "bearer",
+    //       refresh_token: refresh,
+    //       refresh_expires: 28800,
+    //       refresh_expires_at: "9999-12-02T01:12:01.100Z",
+    //       account_id: body.username,
+    //       client_id: id,
+    //       internal_client: true,
+    //       client_service: "fortnite",
+    //       displayName: body.username,
+    //       app: "fortnite",
+    //       in_app_id: body.username,
+    //       device_id: id,
+    //     });
+    //   } else if (grant_type === "refresh_token") {
+    //     let access = await sign(
+    //       {
+    //         email: body.username,
+    //         password: body.password,
+    //         type: "access",
+    //       },
+    //       "Secret"
+    //     );
+
+    //     let refresh = await sign(
+    //       {
+    //         email: body.username,
+    //         password: body.password,
+    //         type: "refresh",
+    //       },
+    //       "Secret"
+    //     );
+
+    //     return c.json({
+    //       access_token: access,
+    //       expires_in: 28800,
+    //       expires_at: "9999-12-02T01:12:01.100Z",
+    //       token_type: "bearer",
+    //       refresh_token: refresh,
+    //       refresh_expires: 28800,
+    //       refresh_expires_at: "9999-12-31T23:59:59.999Z",
+    //       account_id: body.username,
+    //       client_id: id,
+    //       internal_client: true,
+    //       client_service: "fortnite",
+    //       displayName: body.username,
+    //       app: "fortnite",
+    //       in_app_id: body.username,
+    //       device_id: id,
+    //     });
+    //   }
+    // }
 
     if (grant_type === "client_credentials") {
       let access = await sign({ id }, "Core");
